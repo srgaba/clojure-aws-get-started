@@ -1,0 +1,20 @@
+service: clojure-aws-get-started
+
+provider:
+  name: aws
+  runtime: java11
+  stage: dev
+  region: eu-west-1
+
+package:
+  artifact: target/uberjar/clojure-aws-get-started.jar
+
+functions:
+  current-time:
+    handler: infrastructure.http.gateway::handleRequest
+    memorySize: 256
+    events:
+      - http:
+          path: ping
+          method: get
+
